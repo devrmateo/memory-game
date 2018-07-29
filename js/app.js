@@ -30,20 +30,41 @@ function shuffle(array) {
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
  */
- let deck = document.querySelector('.deck');
- deck.addEventListener('click', toggleCard);
+let deck = document.querySelector('.deck');
+let openCards = [];
+deck.addEventListener('click', function(e) {
+    let card = e.target;
+    if (card.classList.contains('card')) {
+        toggleCard(card);
+    }
+});
 
- function toggleCard(e) {
-  e.target.classList.add('open');
-  e.target.classList.add('show');
- }
+function toggleCard(card) {
+    card.classList.toggle('open');
+    card.classList.toggle('show');
+}
 
  /*
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)*/
+
+
  /*
  *  - if the list already has another card, check to see if the two cards match
+ */
+
+ /*
  *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+ */
+
+ /*
  *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+
+
+
+
+
+
