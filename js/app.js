@@ -37,6 +37,7 @@ deck.addEventListener('click', function(e) {
     if (card.classList.contains('card')) {
         toggleCard(card);
         let updatedList = addCardToList(card);
+        cardsMatch(updatedList, card);
     }
 });
 
@@ -56,7 +57,23 @@ function toggleCard(card) {
  /*
  *  - if the list already has another card, check to see if the two cards match
  */
-
+function cardsMatch (list) {
+    if (list.length === 2) {
+        let firstCard = list[0];
+        let secondCard = list[1];
+        if (firstCard.firstElementChild.className === secondCard.firstElementChild.className) {
+            firstCard.classList.toggle('match');
+            secondCard.classList.toggle('match');
+            openCards = [];
+        } else {
+            setTimeout(function () {
+                toggleCard(firstCard);
+                toggleCard(secondCard);
+                openCards = [];
+            }, 1000);
+        }
+    }
+ }
  /*
  *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
  */
