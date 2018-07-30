@@ -36,6 +36,7 @@ deck.addEventListener('click', function(e) {
     let card = e.target;
     if (card.classList.contains('card')) {
         toggleCard(card);
+        let updatedList = addCardToList(card);
     }
 });
 
@@ -46,8 +47,12 @@ function toggleCard(card) {
 
  /*
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)*/
-
-
+ function addCardToList (card) {
+    if (card.classList.contains('open') && !openCards.includes(card) && openCards.length < 2) {
+        openCards.push(card);
+    }
+    return openCards;
+}
  /*
  *  - if the list already has another card, check to see if the two cards match
  */
