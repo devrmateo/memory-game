@@ -34,7 +34,7 @@ let deck = document.querySelector('.deck');
 let openCards = [];
 deck.addEventListener('click', function(e) {
     let card = e.target;
-    if (card.classList.contains('card')) {
+    if (card.classList.contains('card') && !card.classList.contains('open') && !card.classList.contains('show')) {
         addCardToList(card);
         openCard(card, openCards);
     }
