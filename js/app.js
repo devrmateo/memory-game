@@ -35,51 +35,57 @@ let openCards = [];
 deck.addEventListener('click', function(e) {
     let card = e.target;
     if (card.classList.contains('card')) {
-        toggleCard(card);
-        let updatedList = addCardToList(card);
-        cardsMatch(updatedList, card);
+        addCardToList(card);
+        openCard(card, openCards);
+    }
+    if (openCards.length === 2) {
+        checkForMatch(openCards);
     }
 });
 
-function toggleCard(card) {
-    card.classList.toggle('open');
-    card.classList.toggle('show');
+function openCard(card, list) {
+    console.log(list.length);
+    if (list.length <= 2) {
+        card.classList.add('open');
+        card.classList.add('show');
+    }
 }
 
  /*
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)*/
  function addCardToList (card) {
-    if (card.classList.contains('open') && !openCards.includes(card) && openCards.length < 2) {
+    if (!card.classList.contains('match')) {
         openCards.push(card);
     }
-    return openCards;
 }
  /*
  *  - if the list already has another card, check to see if the two cards match
  */
-function cardsMatch (list) {
-    if (list.length === 2) {
-        let firstCard = list[0];
-        let secondCard = list[1];
-        if (firstCard.firstElementChild.className === secondCard.firstElementChild.className) {
-            firstCard.classList.toggle('match');
-            secondCard.classList.toggle('match');
+function checkForMatch (list) {
+    let firstCard = list[0];
+    let secondCard = list[1];
+    if (firstCard.firstElementChild.className === secondCard.firstElementChild.className) {
+        firstCard.classList.add('match');
+        secondCard.classList.add('match');
+        openCards = [];
+    } else {
+        setTimeout(function () {
+            firstCard.classList.remove('open', 'show');
+            secondCard.classList.remove('open', 'show');
             openCards = [];
-        } else {
-            setTimeout(function () {
-                toggleCard(firstCard);
-                toggleCard(secondCard);
-                openCards = [];
-            }, 1000);
-        }
+        }, 1000);
     }
- }
+}
  /*
  *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
  */
-
+/* Taken care of throught the above functions.*/
  /*
  *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+/*
+*/
+/* Taken care of throught the above functions.*/
+/*
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
