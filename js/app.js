@@ -4,7 +4,6 @@
 
 let cards = document.querySelectorAll('.card');
 const cardsArray = Array.from(cards);
-console.log(cardsArray);
 function shuffleCards () {
     shuffle(cardsArray);
     for (card of cardsArray) {
@@ -43,17 +42,17 @@ function shuffle(array) {
 
 let openCards = [];
 let deck = document.querySelector('.deck');
+let moves = 0;
 deck.addEventListener('click', function(e) {
     let card = e.target;
     if (card.classList.contains('card') && !card.classList.contains('open') && !card.classList.contains('show')) {
         openCard(card, openCards);
         addCardToList(card);
-        checkForMatch(openCards);
+        let checkCards = checkForMatch(openCards);
     }
 });
 
 function openCard(card, list) {
-    console.log(list.length);
     if (list.length < 2) {
         card.classList.add('open');
         card.classList.add('show');
@@ -72,6 +71,7 @@ function openCard(card, list) {
  */
 function checkForMatch (list) {
     if (list.length === 2) {
+        incrementCounter();
         let firstCard = list[0];
         let secondCard = list[1];
         if (firstCard.firstElementChild.className === secondCard.firstElementChild.className) {
@@ -101,13 +101,17 @@ function checkForMatch (list) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
- function runGame () {
-    shuffleDeck();
-
- }
-
-
-
+function incrementCounter () {
+    moves +=1;
+    const moveCounter = document.querySelector('.moves');
+    let text = '';
+    if (moves === 1) {
+        text = 'move';
+    } else {
+        text = 'moves';
+    }
+    moveCounter.innerHTML = moves + ' ' + text;
+}
 
 
 
