@@ -111,7 +111,20 @@ function incrementCounter () {
         text = 'moves';
     }
     moveCounter.innerHTML = moves + ' ' + text;
+
+    if (moves === 15) {
+        removeStars();
+    }
+    if (moves === 25) {
+        removeStars();
+    }
 }
+
+function removeStars () {
+    let star = document.querySelector('.stars i');
+    star.remove();
+}
+
 
 
 
