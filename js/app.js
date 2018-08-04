@@ -126,23 +126,51 @@ function removeStars () {
 }
 
 let intervalId;
-
+let time = 0;
 function startTimer () {
-    let time = 0;
     intervalId = setInterval(function () {
         time++;
-        console.log(time);
+        console.log(formatTime(time));
+        displayTimer(time);
     }, 1000);
+
 }
 
 function stopTimer () {
     clearInterval(intervalId);
 }
 
+function displayTimer (time) {
+    const timerField = document.querySelector('.timer');
+    let seconds;
+    if (time === 1) {
+        seconds = 'second';
+    } else if (time > 1 && time < 60) {
+        seconds = 'seconds';
+    } else {
+        seconds = '';
+    }
+    let formattedTime = formatTime(time);
+    timerField.innerHTML = formattedTime + ' ' + seconds;
+}
+
+function formatTime (timeInSeconds) {
+    let minutes = Math.floor(timeInSeconds / 60);
+    let seconds = Math.floor(timeInSeconds % 60);
+    let formattedTime;
+    if (minutes >= 1) {
+        seconds = seconds.toString();
+        seconds = seconds.padStart(2, '0');
+        formattedTime = minutes + ':' + seconds;
+    } else {
+        formattedTime = seconds;
+    }
+    return formattedTime;
+}
+
 startTimer();
 
-setTimeout (stopTimer, 2000);
-
+//setTimeout (stopTimer, 2000);
 
 
 
