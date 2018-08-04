@@ -125,6 +125,26 @@ function removeStars () {
     star.remove();
 }
 
+let intervalId;
+
+function startTimer () {
+    let time = 0;
+    intervalId = setInterval(function () {
+        time++;
+        console.log(time);
+    }, 1000);
+}
+
+function stopTimer () {
+    clearInterval(intervalId);
+}
+
+startTimer();
+
+setTimeout (stopTimer, 2000);
+
+
+
 
 
 

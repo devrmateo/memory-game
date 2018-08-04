@@ -33,6 +33,13 @@ h1 {
     font-weight: 300;
 }
 
+.gameInfo {
+    display: inline;
+}
+
+.info {
+    margin-right: 2em;
+}
 /*
  * Styles for the deck of cards
  */
