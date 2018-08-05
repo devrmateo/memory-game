@@ -43,14 +43,6 @@ function shuffle(array) {
 let openCards = [];
 let deck = document.querySelector('.deck');
 let moves = 0;
-deck.addEventListener('click', function(e) {
-    let card = e.target;
-    if (card.classList.contains('card') && !card.classList.contains('open') && !card.classList.contains('show')) {
-        openCard(card, openCards);
-        addCardToList(card);
-        let checkCards = checkForMatch(openCards);
-    }
-});
 
 function openCard(card, list) {
     if (list.length < 2) {
@@ -118,6 +110,7 @@ function incrementCounter () {
     if (moves === 25) {
         removeStars();
     }
+    return moves;
 }
 
 function removeStars () {
@@ -127,10 +120,9 @@ function removeStars () {
 
 let intervalId;
 let time = 0;
-function startTimer () {
+function startTimer (e) {
     intervalId = setInterval(function () {
         time++;
-        console.log(formatTime(time));
         displayTimer(time);
     }, 1000);
 
@@ -168,11 +160,28 @@ function formatTime (timeInSeconds) {
     return formattedTime;
 }
 
-startTimer();
+function allCardsMatch (currentValue) {
+    return currentValue.classList.contains('match');
+}
 
-//setTimeout (stopTimer, 2000);
+function runGame () {
+    shuffleCards();
+    deck.addEventListener('click', startTimer, {once: true});
+    deck.addEventListener('click', function(e) {
+    let card = e.target;
+    if (card.classList.contains('card') && !card.classList.contains('open') && !card.classList.contains('show')) {
+        openCard(card, openCards);
+        addCardToList(card);
+        checkForMatch(openCards);
+        if (cardsArray.every(allCardsMatch) === true) {
+            stopTimer();
+            console.log('Congratulations!  You finished in ' + formatTime(time) + ' and it took you ' + moves + ' moves.');
+        }
+        }
+    });
+}
 
-
+runGame();
 
 
 
