@@ -134,16 +134,8 @@ function stopTimer () {
 
 function displayTimer (time) {
     const timerField = document.querySelector('.timer');
-    let seconds;
-    if (time === 1) {
-        seconds = 'second';
-    } else if (time > 1 && time < 60) {
-        seconds = 'seconds';
-    } else {
-        seconds = '';
-    }
     let formattedTime = formatTime(time);
-    timerField.innerHTML = formattedTime + ' ' + seconds;
+    timerField.innerHTML = formattedTime;
 }
 
 function formatTime (timeInSeconds) {
@@ -151,18 +143,43 @@ function formatTime (timeInSeconds) {
     let seconds = Math.floor(timeInSeconds % 60);
     let formattedTime;
     if (minutes >= 1) {
-        seconds = seconds.toString();
-        seconds = seconds.padStart(2, '0');
-        formattedTime = minutes + ':' + seconds;
+        formattedTime = minutes + ':' + seconds + 'seconds';
+    } else if (seconds <= 9) {
+        seconds = padSeconds(seconds);
+        formattedTime = seconds + ' seconds';
     } else {
-        formattedTime = seconds;
+        formattedTime = seconds + ' seconds';
     }
     return formattedTime;
+}
+
+function padSeconds (seconds) {
+    return '0' + seconds;
 }
 
 function allCardsMatch (currentValue) {
     return currentValue.classList.contains('match');
 }
+
+function runModal () {
+    const modal = document.querySelector('dialog');
+    const heading = modal.firstElementChild;
+    const closeButton = heading.nextElementSibling;
+    const modalDiv = closeButton.nextElementSibling;
+    const timeField = document.querySelector('.time');
+    const starsField = document.querySelector('.stars');
+    const movesField = document.querySelector('.moves');
+
+    timeField.textContent = formatTime(time);
+
+    modalDiv.textContent = 'Congratulations! You finished in ' + formatTime(time) + ' and it took you ' + moves + ' moves.';
+    modal.showModal();
+    closeButton.addEventListener('click', function() {
+        modal.close();
+    })
+}
+
+runModal();
 
 function runGame () {
     shuffleCards();
@@ -175,7 +192,7 @@ function runGame () {
         checkForMatch(openCards);
         if (cardsArray.every(allCardsMatch) === true) {
             stopTimer();
-            console.log('Congratulations!  You finished in ' + formatTime(time) + ' and it took you ' + moves + ' moves.');
+            runModal();
         }
         }
     });

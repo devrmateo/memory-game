@@ -114,3 +114,25 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+/*
+* Modal
+*/
+
+.close {
+    position: absolute;
+    top:0;
+    right: 5px;
+    cursor: pointer;
+    font-size: 110%;
+}
+
+.modalFieldsDiv {
+    display: flex;
+    justify-content: space-around;
+}
+
+.modalField {
+    display: block;
+    margin-bottom: 1em;
+}
