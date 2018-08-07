@@ -167,14 +167,13 @@ function allCardsMatch (currentValue) {
 
 function runModal () {
     const modal = document.querySelector('dialog');
-    const heading = modal.firstElementChild;
-    const closeButton = heading.nextElementSibling;
-    const modalDiv = closeButton.nextElementSibling;
+    const heading = document.querySelector('h3');
+    const modalDiv = document.querySelector('modalFieldsDiv');
     const timeField = document.querySelector('.timeField');
     const starsField = document.querySelector('.starsField');
     const movesField = document.querySelector('.movesField');
-
-    heading.textContent = 'Congratulations!';
+    const closeButton = document.querySelector('.close');
+    const playAgainButton = document.querySelector('.play');
     timeField.textContent = formatTime(time);
     starsField.textContent = getStars().length;
     movesField.textContent = getMoves();
@@ -182,7 +181,14 @@ function runModal () {
     closeButton.addEventListener('click', function() {
         modal.close();
     })
+    playAgainButton.addEventListener('click', function() {
+        modal.close();
+        resetGame();
+        runGame();
+    });
 }
+
+runModal();
 
 const resetButton = document.querySelector('.fa-repeat');
 resetButton.addEventListener('click', resetGame);

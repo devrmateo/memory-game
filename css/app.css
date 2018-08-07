@@ -123,10 +123,6 @@ h1 {
 * Modal
 */
 
-dialog * {
-    outline: 1px solid red;
-}
-
 h3 {
     text-align: center;
 }
@@ -141,14 +137,23 @@ h3 {
 
 .modalFieldsDiv {
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .modalField {
     display: block;
+
 }
 
 .timeField, .starsField, .movesField {
-    margin-left: .5em;
-    margin-right: 1em;
+    margin-left: .25em;
+    margin-right: 1.5em;
+}
+
+.playAgain {
+    display: flex;
+    flex-basis: 100%;
+    justify-content: center;
+    margin-top: 1em;
 }
