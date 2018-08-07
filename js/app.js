@@ -115,10 +115,12 @@ function removeStars () {
 }
 
 function getStars () {
-    const nodeList = document.querySelectorAll('.fa-star');
+    const nodeList = document.querySelectorAll('.stars li');
     const starList = Array.from(nodeList);
     return starList;
 }
+
+getStars();
 
 let intervalId;
 let time = 0;
@@ -196,7 +198,10 @@ function resetGame () {
     let numberOfStars = getStars().length;
     let maxStars = 3;
     if (numberOfStars < maxStars) {
-
+        let parent = document.querySelector('.stars');
+        let html = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
+        parent.innerHTML = html;
+        getStars().length = 3;
     }
     displayTimer(time);
     stopTimer();
