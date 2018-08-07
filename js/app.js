@@ -63,7 +63,9 @@ function openCard(card, list) {
  */
 function checkForMatch (list) {
     if (list.length === 2) {
-        incrementCounter();
+        moves +=1;
+        getMoves();
+        removeStars();
         let firstCard = list[0];
         let secondCard = list[1];
         if (firstCard.firstElementChild.className === secondCard.firstElementChild.className) {
@@ -77,7 +79,6 @@ function checkForMatch (list) {
                 openCards = [];
             }, 1000);
         }
-        getStars();
     }
 }
  /*
@@ -94,9 +95,8 @@ function checkForMatch (list) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-function incrementCounter () {
-    moves +=1;
-    const moveCounter = document.querySelector('.moves');
+function getMoves () {
+    const moveCounter = document.querySelector('.moveCounter');
     let text = '';
     if (moves === 1) {
         text = 'move';
@@ -104,26 +104,20 @@ function incrementCounter () {
         text = 'moves';
     }
     moveCounter.innerHTML = moves + ' ' + text;
-
-    if (moves === 15) {
-        removeStars();
-    }
-    if (moves === 25) {
-        removeStars();
-    }
     return moves;
 }
 
 function removeStars () {
-    let star = document.querySelector('.stars i');
-    star.remove();
+    let star = document.querySelector('.stars li');
+    if (getMoves() === 15 || getMoves() === 25) {
+        star.remove();
+    }
 }
 
 function getStars () {
     const nodeList = document.querySelectorAll('.fa-star');
     const starList = Array.from(nodeList);
-    console.log(starList);
-    return starList.length;
+    return starList;
 }
 
 let intervalId;
@@ -174,20 +168,40 @@ function runModal () {
     const heading = modal.firstElementChild;
     const closeButton = heading.nextElementSibling;
     const modalDiv = closeButton.nextElementSibling;
-    const timeField = document.querySelector('.time');
-    const starsField = document.querySelector('.stars');
-    const movesField = document.querySelector('.moves');
+    const timeField = document.querySelector('.timeField');
+    const starsField = document.querySelector('.starsField');
+    const movesField = document.querySelector('.movesField');
 
     heading.textContent = 'Congratulations!';
     timeField.textContent = formatTime(time);
-    starsField.textContent =
+    starsField.textContent = getStars().length;
+    movesField.textContent = getMoves();
     modal.showModal();
     closeButton.addEventListener('click', function() {
         modal.close();
     })
 }
 
-//runModal();
+const resetButton = document.querySelector('.fa-repeat');
+resetButton.addEventListener('click', resetGame);
+
+function resetGame () {
+    for (card of cardsArray) {
+        card.classList.value = 'card';
+    }
+    time = 0;
+    moves = 0;
+    let movesField = document.querySelector('.moveCounter');
+    movesField.textContent = '0 moves';
+    let numberOfStars = getStars().length;
+    let maxStars = 3;
+    if (numberOfStars < maxStars) {
+
+    }
+    displayTimer(time);
+    stopTimer();
+    runGame();
+}
 
 function runGame () {
     shuffleCards();
