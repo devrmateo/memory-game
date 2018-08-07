@@ -119,6 +119,14 @@ h1 {
 * Modal
 */
 
+dialog * {
+    outline: 1px solid red;
+}
+
+h3 {
+    text-align: center;
+}
+
 .close {
     position: absolute;
     top:0;
@@ -134,5 +142,9 @@ h1 {
 
 .modalField {
     display: block;
-    margin-bottom: 1em;
+}
+
+.time, .stars, .moves {
+    margin-left: .5em;
+    margin-right: 1em;
 }

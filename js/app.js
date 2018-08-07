@@ -142,19 +142,19 @@ function formatTime (timeInSeconds) {
     let minutes = Math.floor(timeInSeconds / 60);
     let seconds = Math.floor(timeInSeconds % 60);
     let formattedTime;
+    seconds = padSeconds(seconds);
     if (minutes >= 1) {
-        formattedTime = minutes + ':' + seconds + 'seconds';
-    } else if (seconds <= 9) {
-        seconds = padSeconds(seconds);
-        formattedTime = seconds + ' seconds';
+        formattedTime = minutes + ':' + seconds;
     } else {
         formattedTime = seconds + ' seconds';
     }
     return formattedTime;
 }
 
-function padSeconds (seconds) {
-    return '0' + seconds;
+function padSeconds(timeInSeconds) {
+    let string = timeInSeconds.toString();
+    string = string.padStart(2, '0');
+    return string;
 }
 
 function allCardsMatch (currentValue) {
@@ -170,9 +170,8 @@ function runModal () {
     const starsField = document.querySelector('.stars');
     const movesField = document.querySelector('.moves');
 
+    heading.textContent = 'Congratulations!'
     timeField.textContent = formatTime(time);
-
-    modalDiv.textContent = 'Congratulations! You finished in ' + formatTime(time) + ' and it took you ' + moves + ' moves.';
     modal.showModal();
     closeButton.addEventListener('click', function() {
         modal.close();
