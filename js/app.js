@@ -77,6 +77,7 @@ function checkForMatch (list) {
                 openCards = [];
             }, 1000);
         }
+        getStars();
     }
 }
  /*
@@ -116,6 +117,13 @@ function incrementCounter () {
 function removeStars () {
     let star = document.querySelector('.stars i');
     star.remove();
+}
+
+function getStars () {
+    const nodeList = document.querySelectorAll('.fa-star');
+    const starList = Array.from(nodeList);
+    console.log(starList);
+    return starList.length;
 }
 
 let intervalId;
@@ -170,15 +178,16 @@ function runModal () {
     const starsField = document.querySelector('.stars');
     const movesField = document.querySelector('.moves');
 
-    heading.textContent = 'Congratulations!'
+    heading.textContent = 'Congratulations!';
     timeField.textContent = formatTime(time);
+    starsField.textContent =
     modal.showModal();
     closeButton.addEventListener('click', function() {
         modal.close();
     })
 }
 
-runModal();
+//runModal();
 
 function runGame () {
     shuffleCards();
