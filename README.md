@@ -1,20 +1,10 @@
-# Memory Game Project
+# Memory Game
+___
 
-## Table of Contents
+This is an interactive version of the classic memory game, "Concentration."  The game starts out with a randomly shuffled grid of eight pairs of cards, face down, which the user must then match.  As soon as the user clicks the first card, a timer begins, and shows the user their progress until they match all pairs.  There is also a move counter that tracks the number of moves that are made, with the flipping over of each pair of cards counting as one move.  Finally, each user starts out with three stars, with one star being subtracted after fifteen and twenty-five moves, respectively.  The object of the game, therefore, is to match all pairs in the least amount of time, and with the fewest number of moves.
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+# License
 
-## Instructions
+___
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+[MIT Licence](LICENSE.txt)
