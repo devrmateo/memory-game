@@ -174,8 +174,9 @@ function resetGame () {
     for (card of cardsArray) {
         card.classList.value = 'card';
     }
-    time = 0;
+    openCards = [];
     moves = 0;
+    time = 0;
     const movesField = document.querySelector('.moveCounter');
     movesField.textContent = '0 moves';
     let numberOfStars = getStars().length;
