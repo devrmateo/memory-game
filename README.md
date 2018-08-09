@@ -7,8 +7,8 @@ This is an interactive version of the classic memory game, "Concentration."  The
 
 ___
 
-[Bootstrap](https://getbootstrap.com/)
-[Google Fonts](https://fonts.google.com/)
+* [Bootstrap](https://getbootstrap.com/)
+* [Google Fonts](https://fonts.google.com/)
 
 # License
 
