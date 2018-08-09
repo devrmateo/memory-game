@@ -3,8 +3,8 @@ const cards = document.querySelectorAll('.card');
 let openCards = [];
 const deck = document.querySelector('.deck');
 let moves = 0;
-let intervalId;
 let time = 0;
+let intervalId;
 const resetButton = document.querySelector('.fa-repeat');
 
 //Create a list that holds all of the cards.
@@ -106,11 +106,8 @@ function getStars () {
 }
 
 function startTimer () {
-    intervalId = setInterval(function () {
-        time++;
-        displayTimer(time);
-    }, 1000);
-
+    time++;
+    displayTimer(time);
 }
 
 function stopTimer () {
@@ -197,7 +194,9 @@ function resetGame () {
 function runGame () {
     shuffleCards();
     //Only start the timer on the first click.
-    deck.addEventListener('click', startTimer, {once: true});
+    deck.addEventListener('click', function () {
+        intervalId = setInterval(startTimer, 1000);
+    }, {once: true});
     //Set up the event listener for a card.
     deck.addEventListener('click', function(e) {
     //If card is clicked, 'open' it, add it to a list of 'open' cards and check for a match.
