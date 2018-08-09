@@ -13,9 +13,12 @@ const cardsArray = Array.from(cards);
 function shuffleCards () {
     //Use included shuffle function to shuffle deck.
     shuffle(cardsArray);
-    for (card of cardsArray) {
-        deck.appendChild(card);
-    }
+    const fragment = document.createDocumentFragment();
+    cardsArray.forEach(function (card) {
+        fragment.appendChild(card);
+    });
+
+    deck.appendChild(fragment);
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
