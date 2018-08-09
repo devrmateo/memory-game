@@ -13,6 +13,7 @@ const cardsArray = Array.from(cards);
 function shuffleCards () {
     //Use included shuffle function to shuffle deck.
     shuffle(cardsArray);
+    //Create document fragment in order to add all the shuffled cards to the deck at one time, thereby boosting performance.
     const fragment = document.createDocumentFragment();
     cardsArray.forEach(function (card) {
         fragment.appendChild(card);
